@@ -1,0 +1,10 @@
+name: AntiEnd
+main: de.levin.main.AntiEnd
+version: 1.1
+author: LevinZockt
+api-version: 1.13
+
+commands:
+   antiend:
+      aliases: ['ae']
+      usage: /<command>
