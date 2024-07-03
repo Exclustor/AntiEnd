@@ -1,0 +1,9 @@
+name: AntiEnd
+version: '${project.version}'
+main: de.levin.antiend.AntiEnd
+api-version: '1.13'
+author: Exclustor
+commands:
+  antiend:
+    aliases: ['ae']
+    usage: /<command>
