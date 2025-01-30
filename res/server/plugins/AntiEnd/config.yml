@@ -1,0 +1,26 @@
+language: de
+# The language setting for the plugin. Make sure the language file exists in the messages folder, if not create one.
+
+disableEnd: false
+# Determines if the End should be disabled. If true, players are prevented from entering the End dimension.
+
+bypass:
+  permission: antiend.bypass # antiend.*
+  # The permission node required to bypass the End prevention. Use 'antiend.*' to grant all related permissions.
+
+  allowBypass: false
+  # Allows players with the specified permission or operator status to bypass the End prevention if set to true.
+
+sendPreventMessage: true
+# If true, the plugin sends a message to players when they are prevented from entering the End.
+
+slientStart: false
+# If true, the plugin starts silently without sending startup messages to the console.
+
+sendMessagesAsActionbar: false
+# If true, messages from the plugin are sent as action bar messages instead of chat messages.
+
+entryDisabledInWorlds:
+  - world
+  - world_nether
+# A list of worlds where entry into the End is disabled. Players will be prevented from entering the End in these specified worlds.

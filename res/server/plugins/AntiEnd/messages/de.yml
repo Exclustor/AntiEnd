@@ -1,0 +1,10 @@
+prefix: "&3AntiEnd &8⚫&7"
+noPerms: "%p% Du hast keine Berechtigung, dies zu tun."
+reload: "%p% Plugin neu geladen."
+preventMessage: "%p% Das Ende ist auf diesem Server deaktiviert."
+help: "%p% Benutze /antiend help für Hilfe."
+helpList:
+  - "%p% &8&m============&f Version: %v% &8&m============"
+  - "%p% &8- &7/antiend help &8| &fZeigt diesen Text an"
+  - "%p% &8- &7/antiend reload &8| &fLädt das Plugin neu"
+  - "%p% &8&m==================================="

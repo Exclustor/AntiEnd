@@ -1,0 +1,11 @@
+name: AntiEnd
+version: '${project.version}'
+main: de.levin.antiend.AntiEnd
+api-version: '1.13'
+author: Exclustor
+libraries:
+  - com.google.inject:guice:7.0.0
+commands:
+  antiend:
+    aliases: ['ae']
+    usage: /<command>

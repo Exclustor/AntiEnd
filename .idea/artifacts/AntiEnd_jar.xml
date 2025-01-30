@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="AntiEnd:jar">
+    <output-path>$PROJECT_DIR$/../AntiEnd Testserver/plugins</output-path>
+    <root id="archive" name="AntiEnd.jar">
+      <element id="module-output" name="AntiEnd" />
+    </root>
+  </artifact>
+</component>
