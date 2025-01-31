@@ -12,7 +12,7 @@ public class ConfigurationRepository {
     boolean disableEnd;
     Bypass bypass = new Bypass();
     boolean sendPreventMessage;
-    boolean sendMessageInActionbar;
+    boolean sendMessagesAsActionbar;
     List<String> entryDisabledInWorlds = new ArrayList<>();
 
     @Data

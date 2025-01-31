@@ -14,10 +14,7 @@ bypass:
 sendPreventMessage: true
 # If true, the plugin sends a message to players when they are prevented from entering the End.
 
-slientStart: false
-# If true, the plugin starts silently without sending startup messages to the console.
-
-sendMessagesAsActionbar: false
+sendMessagesAsActionbar: true
 # If true, messages from the plugin are sent as action bar messages instead of chat messages.
 
 entryDisabledInWorlds:

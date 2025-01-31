@@ -30,8 +30,9 @@ public class MessagesHelper {
         if (config.isSendPreventMessage() == false)
             return;
 
-        String replacedMessage = ChatColor.translateAlternateColorCodes('&', messages.getPreventMessage().replace("%p%", messages.getPrefix()));
-        if (config.isSendMessageInActionbar())
+        String replacedMessage = ChatColor.translateAlternateColorCodes('&',
+                messages.getPreventMessage().replace("%p%", messages.getPrefix()));
+        if (config.isSendMessagesAsActionbar())
             sendActionText(player, replacedMessage);
         else
             tellTimed(2, player, replacedMessage);

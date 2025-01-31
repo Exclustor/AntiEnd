@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<project name="CCityBuild" default="Build">
+<project name="AntiEnd" default="Build">
     <!-- Wir verwenden diese Datei, um dein Plugin automatisch zu kompilieren und in das plugins/ Verzeichnis zu verschieben,
          und das Hot-Swap-Feature (Live-Debugging) zu nutzen. -->
 
@@ -8,14 +8,9 @@
 
     <!-- Setze das Zielverzeichnis deines Servers -->
     <target name="Build">
-        <jar jarfile="C:\Users\levin\Programming\IdeaProjects\AntiEnd Testserver\plugins\${ant.project.name}.jar"
+        <jar jarfile="C:\Users\levin\Programming\AntiEnd\res\server\plugins\${ant.project.name}.jar"
              basedir="./target/classes/"
              includes="**/*">
-            <!-- Füge die Foundation-Abhängigkeit hinzu -->
-            <zipgroupfileset
-                    dir="C:\Users\levin\.m2\repository\com\google\inject\guice\7.0.0"
-                    includes="**/*.jar"
-                    excludes="**/*-javadoc.jar"/>
         </jar>
     </target>
 </project>

@@ -22,13 +22,13 @@ public class RepositoryFactory {
         }
     }
 
-    public static <T> T load(Class<T> clazz, String fileName) {
+    public static <T> T load(Class<T> clazz, String filePath) {
         var constructor = new Constructor(clazz, new LoaderOptions());
         try (var inputStream = new FileInputStream(AntiEnd.getInstance().getDataFolder()
-                + File.separator + Translation.MESSAGES_FOLDER + File.separator + fileName)) {
+                + File.separator + filePath)) {
             return new Yaml(constructor).loadAs(inputStream, clazz);
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load file: " + fileName, e);
+            throw new RuntimeException("Failed to load file: " + filePath, e);
         }
     }
 }

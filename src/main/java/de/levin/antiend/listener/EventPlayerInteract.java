@@ -10,16 +10,17 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
+import sun.security.util.Debug;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class EventPlayerInteract implements Listener {
 
-    private final ConfigurationRepository config;
+    private ConfigurationRepository config;
 
     public List<String> disabledWorlds;
-    private final MessagesHelper messagesHelper;
+    private MessagesHelper messagesHelper;
 
     @Inject
     public EventPlayerInteract(ConfigurationRepository config, MessagesHelper messagesHelper) {
