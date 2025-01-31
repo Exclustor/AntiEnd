@@ -27,7 +27,7 @@ public final class AntiEnd extends JavaPlugin {
     }
 
     public void ReloadableStart(boolean isReload){
-        Translation.saveMessages(this);   // TODO save config and messages File
+        Translation.saveMessages(this);
         saveDefaultConfig();
 
         if(isReload)
@@ -37,10 +37,7 @@ public final class AntiEnd extends JavaPlugin {
 
         registerEventHandlers(injector);
         registerCommands(injector);
-
-
     }
-
 
     private void registerCommands(Injector injector) {
         getCommand(ANTIEND_COMMAND).setExecutor(injector.getInstance(CommandAntiEnd.class));
@@ -56,10 +53,4 @@ public final class AntiEnd extends JavaPlugin {
     public void onDisable() {
         Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_AQUA + "AntiEnd " + ChatColor.DARK_GRAY + "» " + ChatColor.GRAY + "Disabled");
     }
-
-//    public static void reloadPlugin() {
-//        AntiEnd instance = AntiEnd.getInstance();
-//        instance.reloadConfig();
-//        Translation.reload();
-//    }
 }

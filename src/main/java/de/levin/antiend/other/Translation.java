@@ -23,8 +23,8 @@ public class Translation {
 
         for (Locale language : supportedLanguages) {
             var languageFileName = language + ".yml";
-            File file = new File(MESSAGES_FOLDER, languageFileName);
-            if (file.exists() == false)
+//            File file = new File(MESSAGES_FOLDER + File.separator, languageFileName);
+//            if (file.exists() == false)
                 pluginInstance.saveResource(MESSAGES_FOLDER + File.separator + languageFileName, false);
         }
     }

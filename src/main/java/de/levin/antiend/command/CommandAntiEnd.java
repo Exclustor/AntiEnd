@@ -15,59 +15,59 @@ import java.util.List;
 
 public class CommandAntiEnd implements CommandExecutor, TabCompleter {
 
-    private final MessagesRepository messages;
+	private final MessagesRepository messages;
 
-    @Inject
-    public CommandAntiEnd(MessagesRepository messages) {
-        this.messages = messages;
-    }
+	@Inject
+	public CommandAntiEnd(MessagesRepository messages) {
+		this.messages = messages;
+	}
 
-    @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-        if (!sender.hasPermission("antiend.use") || !sender.hasPermission("antiend.*")) {
-            sendMessage(sender, messages.getNoPerms());
-            return true;
-        }
-        if (args.length != 1) {
-            sendMessage(sender, messages.getHelp());
+	@Override
+	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
+		if (!sender.hasPermission("antiend.use") || !sender.hasPermission("antiend.*")) {
+			sendMessage(sender, messages.getNoPerms());
+			return true;
+		}
 
-        } else {
-            if (args[0].equalsIgnoreCase("help")) {
-                List<String> HelpList = messages.getHelpList();
-                for (String string : HelpList)
-                    sender.sendMessage(string.replace("%p%", messages.getPrefix())
-                            .replace("%v%", AntiEnd.getInstance().getDescription().getVersion().replace("&", "§"))
-                            .replace("&", "§"));
+		if (args.length != 1)
+			sendMessage(sender, messages.getHelp());
+		else {
+			if (args[0].equalsIgnoreCase("help")) {
+				List<String> HelpList = messages.getHelpList();
+				for (String string : HelpList)
+					sender.sendMessage(string.replace("%p%", messages.getPrefix())
+							.replace("%v%", AntiEnd.getInstance().getDescription().getVersion().replace("&", "§"))
+							.replace("&", "§"));
 
-            } else {
-                if (args[0].equalsIgnoreCase("reload")) {
-                    AntiEnd.getInstance().ReloadableStart(true);
-                    sendMessage(sender, messages.getReload());
+			} else {
+				if (args[0].equalsIgnoreCase("reload")) {
+					sendMessage(sender, messages.getReload());
+					AntiEnd.getInstance().ReloadableStart(true);
 
-                } else if (sender.hasPermission("antiend.use") | sender.hasPermission("antiend.*"))
-                    sendMessage(sender, messages.getHelp());
-            }
-        }
+				} else if (sender.hasPermission("antiend.use") | sender.hasPermission("antiend.*"))
+					sendMessage(sender, messages.getHelp());
+			}
+		}
 
-        return true;
-    }
+		return true;
+	}
 
-    @Override
-    public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
-        ArrayList<String> complete = new ArrayList<>();
-        if (args.length == 1 && sender.hasPermission("antiend.use") | sender.hasPermission("antiend.*")) {
-            complete.add("reload");
-            complete.add("help");
-        }
+	@Override
+	public List<String> onTabComplete(CommandSender sender, Command cmd, String label, String[] args) {
+		ArrayList<String> complete = new ArrayList<>();
+		if (args.length == 1 && sender.hasPermission("antiend.use") | sender.hasPermission("antiend.*")) {
+			complete.add("reload");
+			complete.add("help");
+		}
 
-        return complete;
+		return complete;
 
-    }
+	}
 
-    private void sendMessage(CommandSender sender, String message) {
-        var replacedMessage = message.replace("%p%", messages.getPrefix());
-        var coloredMessage = ChatColor.translateAlternateColorCodes('&', replacedMessage);
+	private void sendMessage(CommandSender sender, String message) {
+		var replacedMessage = message.replace("%p%", messages.getPrefix());
+		var coloredMessage = ChatColor.translateAlternateColorCodes('&', replacedMessage);
 
-        sender.sendMessage(coloredMessage);
-    }
+		sender.sendMessage(coloredMessage);
+	}
 }
