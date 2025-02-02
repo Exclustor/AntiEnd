@@ -40,7 +40,7 @@ public class Hologram implements IFlyingText {
             var height = location.getY();
             for (var line : messages.getHologramText()) {
                 if (line.isEmpty()) {
-                    height -= config.getHologram().getHeightBetweenEachLine();
+                    height -= config.getHologram().getSpaceBetweenEachLine();
                     continue;
                 }
 
@@ -49,7 +49,7 @@ public class Hologram implements IFlyingText {
                 configureArmorStand((ArmorStand) entity, line);
                 entityUUIDs.add(entity.getUniqueId());
 
-                height -= config.getHologram().getHeightBetweenEachLine();
+                height -= config.getHologram().getSpaceBetweenEachLine();
             }
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -103,7 +103,7 @@ public class Hologram implements IFlyingText {
                 var calculatedLoc = new Location(location.getWorld(), location.getX(), height, location.getZ());
 
                 armorStand.teleport(calculatedLoc);
-                height -= config.getHologram().getHeightBetweenEachLine();
+                height -= config.getHologram().getSpaceBetweenEachLine();
             }
         } catch (Exception e) {
             logger.error(e.getMessage());

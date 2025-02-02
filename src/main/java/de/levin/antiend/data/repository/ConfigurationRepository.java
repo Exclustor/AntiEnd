@@ -19,7 +19,6 @@ public class ConfigurationRepository {
     List<String> sendCommandsOnPortalEnter = new ArrayList<>();
     Hologram hologram;
 
-
     @Data
     public static class Bypass {
         String permission;
@@ -28,6 +27,6 @@ public class ConfigurationRepository {
 
     @Data
     public static class Hologram {
-        double heightBetweenEachLine;
+        double spaceBetweenEachLine;
     }
 }

@@ -37,4 +37,4 @@ sendCommandsOnPortalEnter:
   # You can use placeholders like %player% or %world%.
 
 hologram:
-  heightBetweenEachLine: 0.2
+  spaceBetweenEachLine: 0.2
