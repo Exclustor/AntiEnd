@@ -5,6 +5,7 @@ api-version: '1.13'
 author: Exclustor
 libraries:
   - com.google.inject:guice:7.0.0
+  - com.fasterxml.jackson.core:jackson-databind:2.17.2
 commands:
   antiend:
     aliases: ['ae']

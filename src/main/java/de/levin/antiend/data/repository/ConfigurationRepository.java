@@ -1,4 +1,4 @@
-package de.levin.antiend.Data;
+package de.levin.antiend.data.repository;
 
 import lombok.Data;
 
@@ -13,11 +13,21 @@ public class ConfigurationRepository {
     Bypass bypass = new Bypass();
     boolean sendPreventMessage;
     boolean sendMessagesAsActionbar;
+    boolean disableJumpIntoPortal;
+    boolean disableEnderEyeThrow;
     List<String> entryDisabledInWorlds = new ArrayList<>();
+    List<String> sendCommandsOnPortalEnter = new ArrayList<>();
+    Hologram hologram;
+
 
     @Data
     public static class Bypass {
         String permission;
         boolean allowBypass;
+    }
+
+    @Data
+    public static class Hologram {
+        double heightBetweenEachLine;
     }
 }

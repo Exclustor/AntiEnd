@@ -8,7 +8,7 @@
 
     <!-- Setze das Zielverzeichnis deines Servers -->
     <target name="Build">
-        <jar jarfile="C:\Users\levin\Programming\AntiEnd\res\server\plugins\${ant.project.name}.jar"
+        <jar jarfile="C:\Users\levin\Programming\IdeaProjects\AntiEnd\res\server\plugins\${ant.project.name}.jar"
              basedir="./target/classes/"
              includes="**/*">
         </jar>

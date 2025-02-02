@@ -1,26 +1,24 @@
 package de.levin.antiend.listener;
 
 import com.google.inject.Inject;
-import de.levin.antiend.Data.ConfigurationRepository;
+import de.levin.antiend.data.repository.ConfigurationRepository;
 import de.levin.antiend.other.MessagesHelper;
-import lombok.var;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
-import sun.security.util.Debug;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class EventPlayerInteract implements Listener {
 
-    private ConfigurationRepository config;
+    public ConfigurationRepository config;
 
     public List<String> disabledWorlds;
-    private MessagesHelper messagesHelper;
+    public MessagesHelper messagesHelper;
 
     @Inject
     public EventPlayerInteract(ConfigurationRepository config, MessagesHelper messagesHelper) {
@@ -29,7 +27,7 @@ public class EventPlayerInteract implements Listener {
         this.disabledWorlds = getDisabledWorlds(config);
     }
 
-    private static List<String> getDisabledWorlds(ConfigurationRepository config){
+    private static List<String> getDisabledWorlds(ConfigurationRepository config) {
         return config.getEntryDisabledInWorlds().stream()
                 .map(String::toLowerCase)
                 .collect(Collectors.toList());
@@ -39,13 +37,13 @@ public class EventPlayerInteract implements Listener {
     public void onPlayerInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
 
-        if(event.getItem() == null)
+        if (event.getItem() == null)
             return;
 
         if (event.getItem().getType() != Material.ENDER_EYE)
             return;
 
-        if (config.isDisableEnd() == false)
+        if (config.isDisableEnd() == false || config.isDisableEnderEyeThrow() == false)
             return;
 
         var playerWorld = player.getWorld().getName().toLowerCase();
@@ -61,7 +59,7 @@ public class EventPlayerInteract implements Listener {
             return;
 
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK && event.getClickedBlock().getType() == Material.END_PORTAL_FRAME) {
-            if (!disabledWorlds.contains(player.getWorld().getName().toLowerCase()))
+            if (disabledWorlds.contains(player.getWorld().getName().toLowerCase()) == false)
                 return;
         }
 
