@@ -1,23 +1,40 @@
-language: en
-# The language setting for the plugin. Make sure the language file exists in the messages folder, if not create one.
+language: de
+# The language setting for the plugin. Ensure the corresponding language file exists in the messages folder; if not, create one.
 
 disableEnd: true
-# Determines if the End should be disabled. If true, players are prevented from entering the End dimension.
+# If set to true, players will be prevented from entering the End dimension.11
 
 bypass:
-  permission: antiend.bypass # antiend.*
-  # The permission node required to bypass the End prevention. Use 'antiend.*' to grant all related permissions.
+  permission: antiend.bypass
+  # Use 'antiend.*' to grant all related permissions.
+  # The permission node required to bypass End entry restrictions.2
 
   allowBypass: false
-  # Allows players with the specified permission or operator status to bypass the End prevention if set to true.
+  # If set to true, players with the specified permission or operator status can bypass the End entry restriction.
 
 sendPreventMessage: true
-# If true, the plugin sends a message to players when they are prevented from entering the End.
+# If enabled, the plugin will notify players when they are prevented from entering the End.
 
 sendMessagesAsActionbar: true
-# If true, messages from the plugin are sent as action bar messages instead of chat messages.
+# If enabled, messages from the plugin will be displayed as action bar messages instead of chat messages.
 
 entryDisabledInWorlds:
   - world
   - world_nether
-# A list of worlds where entry into the End is disabled. Players will be prevented from entering the End in these specified worlds.
+  # A list of worlds where entry into the End is restricted.
+  # Players will be prevented from entering the End in these specified worlds.
+
+disableJumpIntoPortal: true
+# If set to true, players will be blocked from jumping into an End portal.
+disableEnderEyeThrow: true
+# If set to true, players will be unable to throw Ender Eyes.
+
+sendCommandsOnPortalEnter:
+  - "execute as %player% at @s run teleport @s ^ ^0.1 ^-2"
+  # Moves the player back by 2 blocks and up by 0.1 blocks.
+  # Only works if 'disableJumpIntoPortal' is true.
+  # Define commands to be executed when a player enters an End portal.
+  # You can use placeholders like %player% or %world%.
+
+hologram:
+  heightBetweenEachLine: 0.2
