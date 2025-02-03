@@ -3,6 +3,7 @@ package de.levin.antiend;
 import de.levin.antiend.data.IDatabase;
 import de.levin.antiend.data.repository.ConfigurationRepository;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.ArmorStand;
 
 public class HologramUpdater {
 
@@ -16,11 +17,5 @@ public class HologramUpdater {
         this.plugin = plugin;
     }
 
-    public void Test(){
-        if(database.getEndStatus() == false){
-            var runnable = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
 
-            }, 0, 20L);
-        }
-    }
 }

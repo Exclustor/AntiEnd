@@ -124,6 +124,26 @@ public class Hologram implements IFlyingText {
 
     @Override
     public void updateStatus(boolean status) {
-
+//        database.getAll().forEach((uuid, isUpdatable) -> {
+//            var entity = Bukkit.getEntity(uuid);
+//            if (entity == null)
+//                return;
+//
+//            var armorStand = (ArmorStand) entity;
     }
+
+//    public void Test(){
+//        if(database.getEndStatus() == false){
+//            var runnable = Bukkit.getScheduler().runTaskTimer(plugin, () -> {
+//                database.getAll().forEach((uuid, isUpdatable) -> {
+//                    var entity = Bukkit.getEntity(uuid);
+//                    if (entity == null)
+//                        return;
+//
+//                    var armorStand = (ArmorStand) entity;
+//                    armorStand.setCustomName(config.getHologram().getHologramText().get(0));
+//                });
+//            }, 0, 20L);
+//        }
+//    }
 }
