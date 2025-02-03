@@ -3,7 +3,6 @@ package de.levin.antiend.other;
 import com.google.inject.Inject;
 import de.levin.antiend.AntiEnd;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 
 public class Logger {
     private final AntiEnd plugin;

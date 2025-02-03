@@ -12,7 +12,7 @@ import org.bukkit.Location;
 import org.bukkit.entity.ArmorStand;
 import org.bukkit.entity.EntityType;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.UUID;
 
 public class Hologram implements IFlyingText {
@@ -21,6 +21,9 @@ public class Hologram implements IFlyingText {
     private final ConfigurationRepository config;
     private final IDatabase database;
     private final Logger logger;
+
+    private static final String STATUS_PLACEHOLDER = "%status%";
+    private static final String STATUS_DURATION = "%duration%";
 
     @Inject
     public Hologram(MessagesRepository messages, ConfigurationRepository config, IDatabase database, Logger logger) {
@@ -32,7 +35,7 @@ public class Hologram implements IFlyingText {
 
     @Override
     public Result create(Location location) {
-        var entityUUIDs = new ArrayList<UUID>();
+        var entityUUIDs = new HashMap<UUID, Boolean>();
         try {
             if (database.exists() == false)
                 return Result.Failed;
@@ -44,10 +47,11 @@ public class Hologram implements IFlyingText {
                     continue;
                 }
 
+                var isUpdatable = line.contains(STATUS_PLACEHOLDER) || line.contains(STATUS_DURATION);
                 var calculatedLocation = new Location(location.getWorld(), location.getX(), height, location.getZ());
                 var entity = Bukkit.getWorld(location.getWorld().getUID()).spawnEntity(calculatedLocation, EntityType.ARMOR_STAND);
                 configureArmorStand((ArmorStand) entity, line);
-                entityUUIDs.add(entity.getUniqueId());
+                entityUUIDs.put(entity.getUniqueId(), isUpdatable);
 
                 height -= config.getHologram().getSpaceBetweenEachLine();
             }
@@ -68,8 +72,8 @@ public class Hologram implements IFlyingText {
 
     private String replaceCustomName(String name) {
         return ChatColor.translateAlternateColorCodes('&', name
-                .replace("%status%", getReplacedStatus())
-                .replace("%duration%", String.valueOf(database.getDurationEndDisabled())));
+                .replace(STATUS_PLACEHOLDER, getReplacedStatus())
+                .replace(STATUS_DURATION, String.valueOf(database.getDurationEndDisabled())));
     }
 
     private String getReplacedStatus() {
@@ -82,7 +86,7 @@ public class Hologram implements IFlyingText {
     @Override
     public Result delete() {
         try {
-            database.getAll().forEach(uuid -> Bukkit.getEntity(uuid).remove());
+            database.getAll().keySet().forEach(uuid -> Bukkit.getEntity(uuid).remove());
         } catch (Exception e) {
             logger.error(e.getMessage());
             return Result.Failed;
@@ -92,13 +96,13 @@ public class Hologram implements IFlyingText {
 
     @Override
     public Result teleport(Location location) {
-        var uuids = database.getAll();
+        var uuidsWithBoolean = database.getAll();
         if (database.getAll().isEmpty())
             return Result.Failed;
 
         var height = location.getY();
         try {
-            for (var uuid : uuids) {
+            for (var uuid : uuidsWithBoolean.keySet()) {
                 var armorStand = Bukkit.getEntity(uuid);
                 var calculatedLoc = new Location(location.getWorld(), location.getX(), height, location.getZ());
 

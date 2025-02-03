@@ -38,3 +38,29 @@ sendCommandsOnPortalEnter:
 
 hologram:
   spaceBetweenEachLine: 0.2
+  # The space between each line of text in the hologram.
+  # Verwende "open", um das Ende den ganzen Tag offen zu halten.
+  # Verwende "close", um das Ende den ganzen Tag geschlossen zu halten.
+  # Gib eine Zeitspanne an (z. B. "8 - 10" oder "8am - 4pm"), damit das Ende nur in diesem Zeitraum offen ist.
+  # Außerhalb dieser Zeiträume bleibt es geschlossen.
+  schedule:
+    enabled: false
+    # If set to true, the End will only be accessible during the specified time.
+    # If true and 'dynamicOpening.enabled' is also true, the dynamic opening will take precedence.
+    monday: closed
+    tuesday: 12 - 20
+    wednesday: 15 - 16
+    thursday: closed
+    friday: open
+    saturday: 8 - 12
+    sunday: open
+
+  dynamicOpening:
+    enabled: false
+    # If set to true, the End will open and close at specified intervals.
+    # If true and 'schedule.enabled' is also true, the dynamic opening will take precedence.
+    interval: 5  # Das Ende öffnet alle 5 Stunden.
+    duration: 2  # Es bleibt für 2 Stunden geöffnet.
+    # Nach dem Schließen bleibt es für (interval - duration) Stunden geschlossen.
+    # Beispiel: Wenn interval=5 und duration=2, dann öffnet es alle 5 Stunden für 2 Stunden
+    # und bleibt danach für 3 Stunden geschlossen, bevor der Zyklus wieder beginnt.

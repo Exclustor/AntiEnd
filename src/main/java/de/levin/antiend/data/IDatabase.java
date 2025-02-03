@@ -1,19 +1,20 @@
 package de.levin.antiend.data;
 
-import org.bukkit.Location;
-import org.bukkit.entity.ArmorStand;
-import org.bukkit.entity.Entity;
-
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface IDatabase {
 
-    Result save(List<UUID> flyingText);
+    /**
+     * UUID    -> Bukkit Entity <br>
+     * Boolean -> Is updatable
+     * */
+    Result save(Map<UUID, Boolean> uuidBooleanMap);
     Result delete();
     boolean getEndStatus();
     boolean exists();
-    List<UUID> getAll();
+    Map<UUID, Boolean> getAll();
     int getDurationEndDisabled();
 }
 
