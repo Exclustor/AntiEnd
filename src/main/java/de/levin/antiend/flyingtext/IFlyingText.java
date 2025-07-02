@@ -8,6 +8,5 @@ public interface IFlyingText {
     Result create(Location location);
     Result delete();
     Result teleport(Location location);
-    void updateDuration(int number);
-    void updateStatus(boolean status);
+    void updateText(String placeholder, String value);
 }

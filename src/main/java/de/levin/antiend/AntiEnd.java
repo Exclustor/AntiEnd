@@ -1,5 +1,9 @@
 package de.levin.antiend;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
+import com.comphenix.protocol.wrappers.WrappedDataWatcher;
+import com.github.retrooper.packetevents.PacketEvents;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import de.levin.antiend.command.CommandAntiEnd;
@@ -17,6 +21,8 @@ public final class AntiEnd extends JavaPlugin {
     private static AntiEnd instance;
     private static final String ANTIEND_COMMAND = "antiend";
     public static final String PREFIX = "\u001B[36mAntiEnd \u001B[30m⚫\u001B[37m\u001B[0m";
+    @Getter
+    private ProtocolManager protocolManager;
 
     @Override
     public void onEnable() {
@@ -24,6 +30,11 @@ public final class AntiEnd extends JavaPlugin {
         ReloadableStart(false);
 
         Bukkit.getConsoleSender().sendMessage(PREFIX + "Enabled");
+    }
+
+    @Override
+    public void onLoad() {
+        protocolManager = ProtocolLibrary.getProtocolManager();
     }
 
     public void ReloadableStart(boolean isReload) {
@@ -66,6 +77,8 @@ public final class AntiEnd extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        PacketEvents.getAPI().terminate();
+
         Bukkit.getConsoleSender().sendMessage(PREFIX + ChatColor.GRAY + "Disabled");
     }
 }

@@ -1,6 +1,7 @@
 package de.levin.antiend.data;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import de.levin.antiend.viewmodel.FlyingTextViewModel;
 import lombok.Data;
 
 import java.util.*;
@@ -13,6 +14,6 @@ public class JsonObjects {
      * UUID -> Bukkit Entity <br>
      * Boolean -> Is updatable
      */
-    private volatile Map<UUID, Boolean> entityUUIDs = new HashMap<>();
+    private volatile HashSet<FlyingTextViewModel> entityUUIDs = new HashSet<>();
     private volatile boolean endStatus;
 }

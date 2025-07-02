@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/AntiEnd.iml" filepath="$PROJECT_DIR$/AntiEnd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/AntiEnd.iml" filepath="$PROJECT_DIR$/.idea/AntiEnd.iml" />
     </modules>
   </component>
 </project>

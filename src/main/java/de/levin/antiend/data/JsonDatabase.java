@@ -3,11 +3,13 @@ package de.levin.antiend.data;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import de.levin.antiend.AntiEnd;
 import de.levin.antiend.other.Logger;
+import de.levin.antiend.viewmodel.FlyingTextViewModel;
 import jakarta.inject.Inject;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.UUID;
 
@@ -26,8 +28,8 @@ public class JsonDatabase implements IDatabase {
     }
 
     @Override
-    public Result save(Map<UUID, Boolean> uuidBooleanMap) {
-        jsonObjects.getEntityUUIDs().putAll(uuidBooleanMap);
+    public Result save(HashSet<FlyingTextViewModel> flyingTextViewModel) {
+        jsonObjects.getEntityUUIDs().addAll(flyingTextViewModel);
         return save();
     }
 
@@ -36,7 +38,7 @@ public class JsonDatabase implements IDatabase {
         if (jsonObjects.getEntityUUIDs().isEmpty())
             return Result.Failed;
 
-        jsonObjects.setEntityUUIDs(new HashMap<>());
+        jsonObjects.setEntityUUIDs(new HashSet<>());
         return save();
     }
 
@@ -46,18 +48,28 @@ public class JsonDatabase implements IDatabase {
     }
 
     @Override
+    public void setEndStatus(boolean endStatus) {
+        jsonObjects.setEndStatus(endStatus);
+    }
+
+    @Override
     public boolean exists() {
         return jsonObjects.getEntityUUIDs().isEmpty();
     }
 
     @Override
-    public Map<UUID, Boolean> getAll() {
+    public HashSet<FlyingTextViewModel> getAll() {
         return jsonObjects.getEntityUUIDs();
     }
 
     @Override
     public int getDurationEndDisabled() {
         return jsonObjects.getDuration();
+    }
+
+    @Override
+    public void setDurationEndDisabled(int duration) {
+        jsonObjects.setDuration(duration);
     }
 
     private Result save() {

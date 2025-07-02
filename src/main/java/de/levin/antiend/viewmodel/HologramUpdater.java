@@ -1,9 +1,8 @@
-package de.levin.antiend;
+package de.levin.antiend.viewmodel;
 
+import de.levin.antiend.AntiEnd;
 import de.levin.antiend.data.IDatabase;
 import de.levin.antiend.data.repository.ConfigurationRepository;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.ArmorStand;
 
 public class HologramUpdater {
 
