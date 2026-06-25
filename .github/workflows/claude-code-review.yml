@@ -1,18 +1,44 @@
-name: Claude Code Review
+name: Claude Reviews
 
 on:
   pull_request:
     types: [opened, synchronize, ready_for_review, reopened]
 
 jobs:
-  claude-review:
+  security-review:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      pull-requests: read
+      pull-requests: write
       issues: read
       id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
+      - name: Run Claude Security Review
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          claude_args: |
+            --model claude-opus-4-8
+          prompt: |
+            Führe für diesen Pull Request AUSSCHLIESSLICH eine Security-Review durch.
+
+            Suche gezielt nach Sicherheitslücken: Injection (SQL, Command, XSS, LDAP), unsichere Authentifizierung und Autorisierung, im Code hinterlegte Secrets, Keys oder Passwörter, unsichere Deserialisierung, SSRF, Path-Traversal, fehlende oder fehlerhafte Eingabevalidierung, unsichere Kryptografie, schwache Zufallszahlen, exponierte sensible Daten und unsichere Abhängigkeiten.
+
+            Konzentriere dich ausschließlich auf die Änderungen dieses PR und nur auf Sicherheit (keine reinen Stil-, Performance- oder Wartbarkeits-Themen, die werden separat geprüft). Poste konkrete Befunde mit Datei, Zeile und Schweregrad. Wenn keine Sicherheitsprobleme gefunden werden, bestätige das kurz. Antworte auf Deutsch. Beginne deinen Kommentar mit der Überschrift "## 🔒 Security-Review".
+          track_progress: true
+
+  code-review:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: read
+      id-token: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -20,10 +46,15 @@ jobs:
           fetch-depth: 1
 
       - name: Run Claude Code Review
-        id: claude-review
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
-          plugins: 'code-review@claude-code-plugins'
-          prompt: '/code-review:code-review ${{ github.repository }}/pull/${{ github.event.pull_request.number }}'
+          claude_args: |
+            --model claude-opus-4-8
+          prompt: |
+            Führe für diesen Pull Request AUSSCHLIESSLICH eine Code-Qualitäts-Review durch.
+
+            Prüfe auf: Korrektheit, Logikfehler, mögliche Bugs, Race Conditions, fehlende Fehlerbehandlung, nicht abgedeckte Edge Cases, Performance-Probleme, unnötige Komplexität, Wartbarkeit, Lesbarkeit und Einhaltung gängiger Best Practices.
+
+            Konzentriere dich ausschließlich auf die Änderungen dieses PR und auf Code-Qualität. Sicherheitslücken werden von einem separaten Agent geprüft, lasse reine Security-Themen hier aus. Poste konkrete, umsetzbare Befunde mit Datei, Zeile und Schweregrad. Wenn alles in Ordnung ist, bestätige das kurz. Antworte auf Deutsch. Beginne deinen Kommentar mit der Überschrift "## 🧐 Code-Review".
+          track_progress: true
